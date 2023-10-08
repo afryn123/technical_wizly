@@ -1,0 +1,8 @@
+1. SELECT * FROM employees
+2. SELECT count(job_title) AS total_manager FROM employees WHERE job_title='Manager'
+3. SELECT name, salary FROM employees WHERE department='Sales' OR department='Marketing'
+4. SELECT AVG(salary) AS average_salary FROM employees WHERE joined_date >= ( SELECT MAX(joined_date) - INTERVAL 5 YEAR FROM employees)
+5. SELECT employees.name AS name, SUM(sales) AS sales_total from employees JOIN sales_data ON employees.employee_id = sales_data.employee_id GROUP BY employees.employee_id ORDER BY sales_total DESC LIMIT 5
+6. SELECT e1.department, e1.name AS highest_salary_employee, e1.salary AS highest_salary, e2.average_salary FROM employees e1 INNER JOIN ( SELECT department, MAX(salary) AS max_salary FROM employees GROUP BY department ) e3 ON e1.department = e3.department AND e1.salary = e3.max_salary INNER JOIN ( SELECT department, AVG(salary) AS average_salary FROM employees GROUP BY department ) e2 ON e1.department = e2.department ORDER BY average_salary DESC LIMIT 1
+7. SELECT employees.name AS name, SUM(sales) AS sales_total, RANK() OVER (ORDER BY SUM(sales) DESC) AS sales_rank FROM employees JOIN sales_data ON employees.employee_id = sales_data.employee_id GROUP BY employees.employee_id ORDER BY sales_total DESC;
+ 
