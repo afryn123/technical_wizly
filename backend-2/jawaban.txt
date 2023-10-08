@@ -18,4 +18,17 @@ JAWAB
 5. SELECT employees.name AS name, SUM(sales) AS sales_total from employees JOIN sales_data ON employees.employee_id = sales_data.employee_id GROUP BY employees.employee_id ORDER BY sales_total DESC LIMIT 5
 6. SELECT e1.department, e1.name AS highest_salary_employee, e1.salary AS highest_salary, e2.average_salary FROM employees e1 INNER JOIN ( SELECT department, MAX(salary) AS max_salary FROM employees GROUP BY department ) e3 ON e1.department = e3.department AND e1.salary = e3.max_salary INNER JOIN ( SELECT department, AVG(salary) AS average_salary FROM employees GROUP BY department ) e2 ON e1.department = e2.department ORDER BY average_salary DESC LIMIT 1
 7. SELECT employees.name AS name, SUM(sales) AS sales_total, RANK() OVER (ORDER BY SUM(sales) DESC) AS sales_rank FROM employees JOIN sales_data ON employees.employee_id = sales_data.employee_id GROUP BY employees.employee_id ORDER BY sales_total DESC;
- 
+8. 
+DELIMITER //
+CREATE PROCEDURE ProcGetNameAndSalary( DepartmentName VARCHAR(50))
+BEGIN
+    SELECT
+        name,
+        salary,
+    FROM
+        Employees
+    WHERE
+        department = DepartmentName;
+
+END //
+DELIMITER ; 
