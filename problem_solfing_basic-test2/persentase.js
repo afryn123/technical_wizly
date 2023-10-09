@@ -1,5 +1,3 @@
-const arr = [-1, -3, -1, 0, 2, 5];
-
 function Pesentase(arr) {
   let positiveCount = 0;
   let negativeCount = 0;
@@ -13,15 +11,16 @@ function Pesentase(arr) {
       zeroCount++;
     }
   }
-  const persentasePositive = parseFloat(
-    (positiveCount / arr.length).toFixed(6)
-  );
-  const persentaseNegative = parseFloat(
-    (negativeCount / arr.length).toFixed(6)
-  );
-  const persentaseZero = parseFloat((zeroCount / arr.length).toFixed(6));
 
-  console.log({ persentasePositive, persentaseNegative, persentaseZero });
+  const persentasePositive = (positiveCount / arr.length).toFixed(6);
+  const persentaseNegative = (negativeCount / arr.length).toFixed(6);
+  const persentaseZero = (zeroCount / arr.length).toFixed(6);
+
+  return { persentasePositive, persentaseNegative, persentaseZero };
 }
 
-Pesentase(arr);
+const arr = [-1, -3, -1, 0, 2, 5];
+const result = Pesentase(arr);
+console.log(
+  `${result.persentaseNegative} \n${result.persentasePositive} \n${result.persentaseZero}`
+);
